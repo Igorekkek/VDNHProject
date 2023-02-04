@@ -19,21 +19,27 @@ class CreateUserAPI(APIView):
 
 class HistoryView(APIView):
     def post(self, request):
-        user_code = request.data['user_code']
-        rouds = TravelRoute.objects.filter(user__user_code=user_code)
-        answer = []
-        for roud in rouds:
-            answer.append(POISerializer(roud.way.all(), many=True).data)
+        try:
+            user_code = request.data['user_code']
+            rouds = TravelRoute.objects.filter(user__user_code=user_code)
+            answer = []
+            for roud in rouds:
+                answer.append(POISerializer(roud.way.all(), many=True).data)
+        except:
+            return Response({'error' : '-1'})
         return Response({'post': answer})
 
 class AddHistoryView(APIView):
     def post(self, request):
-        user_code = request.data['user_code']
-        trip = TravelRoute.objects.create(user=User.objects.get(user_code=user_code))
-        for point in request.data['data']:
-            print(point)
-            p = POISerializer(data=point)
-            trip.way.add(p)
-        trip.save()
+        try:
+            user_code = request.data['user_code']
+            trip = TravelRoute.objects.create(user=User.objects.get(user_code=user_code))
+            for point in request.data['data']:
+                print(point)
+                p = POISerializer(data=point)
+                trip.way.add(p)
+            trip.save()
+        except:
+            return Response({'error' : '-1'})
         return Response({'ans' : 'good'})
         
