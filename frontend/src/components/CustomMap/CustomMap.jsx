@@ -1,9 +1,11 @@
 import cl from './CustomMap.module.css'
 import React, { useRef, useState } from 'react'
-import { Map, YMaps } from '@pbe/react-yandex-maps'
+import { Map, Placemark, YMaps } from '@pbe/react-yandex-maps'
+import { usePoints } from '../../hooks'
 
 export const CustomMap = () => {
   const [ymaps, setYmaps] = useState(null)
+  const { data: points } = usePoints()
   const routes = useRef(null)
   const map = useRef(null)
 
@@ -44,6 +46,7 @@ export const CustomMap = () => {
              ref.behaviors.disable(['scrollZoom'])
            }}
       >
+        {points?.map(point => <Placemark geometry={[point.longitude, point.latitude]}/>)}
       </Map>
     </YMaps>
   )

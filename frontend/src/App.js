@@ -1,9 +1,13 @@
 import './App.css'
 import CustomMap from './components/CustomMap/CustomMap'
 import PointList from './components/PointList/PointList'
+import { QueryClient, QueryClientProvider } from 'react-query'
+
+const queryClient = new QueryClient()
 
 function App() {
   return (
+    <QueryClientProvider client={queryClient}>
     <main className="App">
       <div className="map">
         <div className="map__content">
@@ -14,6 +18,7 @@ function App() {
         </div>
       </div>
     </main>
+  </QueryClientProvider>
 )
 }
 
