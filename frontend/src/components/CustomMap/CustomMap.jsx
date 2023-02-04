@@ -32,7 +32,7 @@ export const CustomMap = () => {
   }
 
   return (
-    <YMaps query={{ lang: 'en_RU', apikey: '2a72884d-c5bf-4010-b9af-72aa9d14b5ae' }}>
+    <YMaps query={{ lang: 'en_RU', apikey: process.env.REACT_APP_YMAPS_API_KEY }}>
       <Map className={cl.map}
            defaultState={{ center: [55.753994, 37.622093], zoom: 11 }}
            modules={['multiRouter.MultiRoute']}
