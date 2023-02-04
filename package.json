@@ -1,6 +1,12 @@
 {
   "dependencies": {
     "@pbe/react-yandex-maps": "^1.2.2",
-    "classnames": "^2.3.2"
+    "classnames": "^2.3.2",
+    "concurrently": "^7.6.0"
+  },
+  "scripts": {
+    "server": "python backend/manage.py runserver",
+    "client": "cd frontend && npm run start",
+    "dev": "concurrently \"npm run client\" \"npm run server\""
   }
 }
