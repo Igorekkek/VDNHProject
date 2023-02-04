@@ -1,12 +1,11 @@
 import React from 'react'
+import cl from './PointList.module.css'
 
 const PointList = () => {
-
-
   return (
-    <div>
+      <ul className={cl.list}>
 
-    </div>
+      </ul>
   )
 }
 
