@@ -1,7 +1,14 @@
 import cl from './CustomMap.module.css'
 import React, { useRef, useState } from 'react'
-import { Map, Placemark, YMaps } from '@pbe/react-yandex-maps'
+import { Map, Placemark, YMaps, ZoomControl } from '@pbe/react-yandex-maps'
 import { usePoints } from '../../hooks'
+
+const categoryToColor = {
+  'Развлечения': '#ee5041',
+  'Павильон': '#000',
+  'Музей': '#bbb',
+  'Вход': '#22bb30'
+}
 
 export const CustomMap = () => {
   const [ymaps, setYmaps] = useState(null)
@@ -46,7 +53,12 @@ export const CustomMap = () => {
              ref.behaviors.disable(['scrollZoom'])
            }}
       >
-        {points?.map(point => <Placemark geometry={[point.longitude, point.latitude]}/>)}
+        <ZoomControl/>
+        {points?.map(point => {
+          return <Placemark geometry={[point.longitude, point.latitude]}
+                            defaultOptions={{ iconColor: categoryToColor[point.category.slice(1, point.category.length - 1)] || '#dddddd' }}>
+          </Placemark>
+        })}
       </Map>
     </YMaps>
   )
