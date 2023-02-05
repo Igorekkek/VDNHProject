@@ -6,7 +6,7 @@ import { MapContext } from '../../context/MapContext'
 export const RouteView = () => {
   const { curRefPoints } = useContext(MapContext)
   return <ul className={cl.view}>
-    {curRefPoints?.map(point => {
+    {curRefPoints?.slice(Math.max(curRefPoints.length - 10, 0), Math.min(10, curRefPoints.length)).map((point) => {
       return <li className={cl.mark}>
         <img draggable={false} alt={`map icon of ${point.title}`} src={icon} className={cl.mark__icon}/>
         <p className={cl.mark__description}>{point.title}</p>

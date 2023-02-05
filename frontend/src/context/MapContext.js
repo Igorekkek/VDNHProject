@@ -5,16 +5,13 @@ export const MapContext = createContext()
 export const MapProvider = (props) => {
   const [curRefPoints, setCurRefPoints] = useState([])
   const addRefPoint = (point) => {
-    if (curRefPoints.some((p) => point === p)) return
+    if (curRefPoints.some((p) => point.code === p.code)) return
     setCurRefPoints([...curRefPoints, point])
   }
   const removeRefPoint = (point) => {
-    setCurRefPoints(curRefPoints.filter(p => point !== p))
+    setCurRefPoints(curRefPoints.filter(p => point.code !== p.code))
   }
-  const isInRefPoints = (point) => curRefPoints.includes(point)
-
-  localStorage.setItem('userMapApiKey', localStorage.getItem('userMapApiKey') ?? 'sdifysbkjbiu2343dfsf')
-  const userKey = localStorage.getItem('userMapApiKey')
+  const isInRefPoints = (point)  => curRefPoints.some(p => p.code === point.code)
 
   return <MapContext.Provider
     value={{
@@ -23,6 +20,5 @@ export const MapProvider = (props) => {
       addRefPoint,
       removeRefPoint,
       isInRefPoints,
-      userKey
     }}>{props.children}</MapContext.Provider>
 }
