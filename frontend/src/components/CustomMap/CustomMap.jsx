@@ -1,7 +1,8 @@
 import cl from './CustomMap.module.css'
-import React, { useRef, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { Map, Placemark, YMaps, ZoomControl } from '@pbe/react-yandex-maps'
 import { usePoints } from '../../hooks'
+import { MapContext } from '../../context/MapContext'
 
 const categoryToColor = {
   'Развлечения': '#ee5041',
@@ -10,9 +11,13 @@ const categoryToColor = {
   'Вход': '#22bb30'
 }
 
+const defaultMapState = { center: [55.828693, 37.633724], zoom: 16 }
+
 export const CustomMap = () => {
   const [ymaps, setYmaps] = useState(null)
   const { data: points } = usePoints()
+  const {curRefPoints: referencePoints} = useContext(MapContext)
+
   const routes = useRef(null)
   const map = useRef(null)
 
@@ -21,9 +26,9 @@ export const CustomMap = () => {
   }
 
   const getRoute = ref => {
-    if (ymaps) {
+    if (ymaps && referencePoints?.length) {
       const multiRoute = new ymaps.multiRouter.MultiRoute({
-        referencePoints: [[55.831916666036065, 37.62575707838934], [55.83374020944655, 37.62685141966741]],
+        referencePoints,
         params: {
           routingMode: 'pedestrian'
         }
@@ -41,9 +46,9 @@ export const CustomMap = () => {
   }
 
   return (
-    <YMaps query={{ lang: 'en_RU', apikey: process.env.REACT_APP_YMAPS_API_KEY }}>
+    <YMaps query={{ lang: 'ru_RU', apikey: process.env.REACT_APP_YMAPS_API_KEY }}>
       <Map className={cl.map}
-           defaultState={{ center: [55.753994, 37.622093], zoom: 11 }}
+           defaultState={defaultMapState}
            modules={['multiRouter.MultiRoute']}
            onLoad={onLoad}
            instanceRef={ref => {
@@ -56,7 +61,8 @@ export const CustomMap = () => {
         <ZoomControl/>
         {points?.map(point => {
           return <Placemark geometry={[point.longitude, point.latitude]}
-                            defaultOptions={{ iconColor: categoryToColor[point.category.slice(1, point.category.length - 1)] || '#dddddd' }}>
+                            defaultOptions={{ iconColor: categoryToColor[point.category.slice(1, point.category.length - 1)] || '#dddddd' }}
+          >
           </Placemark>
         })}
       </Map>
