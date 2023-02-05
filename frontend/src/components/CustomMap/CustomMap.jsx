@@ -54,7 +54,7 @@ export const CustomMap = () => {
              if (!ref) return
              getRoute(ref)
              map.current = ref
-             ref.behaviors.disable(['scrollZoom'])
+             ref.behaviors.disable(['scrollZoom', 'rightMouseButtonMagnifier'])
            }}
       >
         <ZoomControl/>
