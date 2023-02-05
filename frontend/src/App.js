@@ -1,6 +1,6 @@
 import './App.css'
 import CustomMap from './components/CustomMap/CustomMap'
-import PointList from './components/PointList/PointList'
+import RouteSelector from './components/RouteSelector/RouteSelector'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { MapProvider } from './context/MapContext'
 import { RouteView } from './components/RouteView/RouteView'
@@ -17,7 +17,7 @@ function App() {
             <CustomMap/>
           </div>
           <div className="map__point-list">
-            <PointList/>
+            <RouteSelector/>
           </div>
         </div>
         <div className="route-view">

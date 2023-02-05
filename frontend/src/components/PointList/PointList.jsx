@@ -1,30 +1,26 @@
-import React, { useContext } from 'react'
 import cl from './PointList.module.css'
+import cn from 'classnames'
+import React, { useContext } from 'react'
 import { usePoints } from '../../hooks'
 import { MapContext } from '../../context/MapContext'
-import cn from 'classnames'
 
-const PointList = () => {
-  const { isLoading, error, data } = usePoints()
+export const PointList = () => {
+  const { isLoading, error, data: points } = usePoints()
   const { addRefPoint, removeRefPoint, isInRefPoints } = useContext(MapContext)
 
-  if (isLoading) return <li className={cl.list}></li>
-  if (error) return <div>Error occured</div>
+  if (isLoading) return <ul className={cl.list}></ul>
+  if (error) return <div>Error occurred</div>
 
-  return (
-    <ul className={cl.list}>
-      {data.map(point => <li
-        className={cn(cl.list__item, { [cl.list__item_chosen]: isInRefPoints(point) })}
-        key={point.code}
-        onClick={() => {
-          isInRefPoints(point)
-            ? removeRefPoint(point)
-            : addRefPoint(point)
-        }}>
-        {point.title}
-      </li>)}
-    </ul>
-  )
+  return <ul className={cl.list}>
+    {points.map(point => <li
+      className={cn(cl.item, { [cl.item_chosen]: isInRefPoints(point) })}
+      key={point.code}
+      onClick={() => {
+        isInRefPoints(point)
+          ? removeRefPoint(point)
+          : addRefPoint(point)
+      }}>
+      <h4 className={cl.item__title}>{point.title}</h4>
+    </li>)}
+  </ul>
 }
-
-export default PointList

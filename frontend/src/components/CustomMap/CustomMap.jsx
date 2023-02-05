@@ -61,7 +61,6 @@ export const CustomMap = () => {
         {points?.map((point) => {
           return <Placemark geometry={[point.longitude, point.latitude]}
                             options={{ iconColor: (isInRefPoints(point) && '#0000ff') || categoryToColor[point.category] || '#dddddd' }}
-                            defaultOptions={{}}
                             onClick={() => {
                               isInRefPoints(point)
                                 ? removeRefPoint(point)

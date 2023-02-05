@@ -36,4 +36,3 @@ class AddHistoryView(APIView):
             trip.way.add(p)
         trip.save()
         return Response({'ans' : 'good'})
-        

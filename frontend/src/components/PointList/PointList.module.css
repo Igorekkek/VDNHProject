@@ -1,8 +1,5 @@
-.list {
-    background-color: #000;
-    width: 100%;
-    height: 100%;
 
+.list {
     list-style: none;
     margin-block-start: 0;
     margin-bottom: 0;
@@ -10,34 +7,26 @@
     padding-inline-start: 0;
     display: flex;
     flex-direction: column;
-
-    overflow-y: scroll;
-    scrollbar-gutter: stable;
-    padding: 3px;
-
-    border-radius: 10px;
 }
 
-.list::-webkit-scrollbar {
-    background-color: #222;
-    width: 8px;
-}
 
-.list::-webkit-scrollbar-thumb {
-    background-color: #fff;
-}
-
-.list__item {
+.item {
     color: #fff;
-    background-image: linear-gradient(90deg, transparent, transparent);
-    transition: 3s ease-in-out;
+    transition: .1s ease-in-out;
 }
 
-.list__item:hover {
-    background-image: linear-gradient(90deg, #FC354C, #0ABFBC);
+.item:hover {
+    background-color: #fff;
+    color: #000;
     cursor: pointer;
+    box-shadow: black;
 }
 
-.list__item_chosen {
-    background-image: linear-gradient(90deg, #FC354C, #0ABFBC);
+.item_chosen {
+    background-color: #fff;
+    color: #000
+}
+
+.item__title {
+    margin: .5rem;
 }

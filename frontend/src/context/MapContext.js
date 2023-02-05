@@ -13,6 +13,16 @@ export const MapProvider = (props) => {
   }
   const isInRefPoints = (point) => curRefPoints.includes(point)
 
+  localStorage.setItem('userMapApiKey', localStorage.getItem('userMapApiKey') ?? 'sdifysbkjbiu2343dfsf')
+  const userKey = localStorage.getItem('userMapApiKey')
+
   return <MapContext.Provider
-    value={{ curRefPoints, setCurRefPoints, addRefPoint, removeRefPoint, isInRefPoints }}>{props.children}</MapContext.Provider>
+    value={{
+      curRefPoints,
+      setCurRefPoints,
+      addRefPoint,
+      removeRefPoint,
+      isInRefPoints,
+      userKey
+    }}>{props.children}</MapContext.Provider>
 }
