@@ -14,12 +14,12 @@ const PointList = () => {
   return (
     <ul className={cl.list}>
       {data.map(point => <li
-        className={cn(cl.list__item, { [cl.list__item_chosen]: isInRefPoints([point.longitude, point.latitude]) })}
+        className={cn(cl.list__item, { [cl.list__item_chosen]: isInRefPoints(point) })}
         key={point.code}
         onClick={() => {
-          isInRefPoints([point.longitude, point.latitude])
-            ? removeRefPoint([point.longitude, point.latitude])
-            : addRefPoint([point.longitude, point.latitude])
+          isInRefPoints(point)
+            ? removeRefPoint(point)
+            : addRefPoint(point)
         }}>
         {point.title}
       </li>)}

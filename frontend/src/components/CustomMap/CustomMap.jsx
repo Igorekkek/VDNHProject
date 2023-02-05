@@ -28,7 +28,7 @@ export const CustomMap = () => {
   const getRoute = ref => {
     if (ymaps && referencePoints?.length) {
       const multiRoute = new ymaps.multiRouter.MultiRoute({
-        referencePoints,
+        referencePoints: referencePoints.map((p) => [p.longitude, p.latitude]),
         params: {
           routingMode: 'pedestrian'
         }
@@ -59,17 +59,16 @@ export const CustomMap = () => {
            }}
       >
         <ZoomControl/>
-        {points?.map(({ category, latitude, longitude }) => {
-          return <Placemark geometry={[longitude, latitude]}
-                            options={{ iconColor: (isInRefPoints([longitude, latitude]) && '#0000ff') || categoryToColor[category.slice(1, category.length - 1)] || '#dddddd' }}
+        {points?.map((point) => {
+          return <Placemark geometry={[point.longitude, point.latitude]}
+                            options={{ iconColor: (isInRefPoints(point) && '#0000ff') || categoryToColor[point.category.slice(1, point.category.length - 1)] || '#dddddd' }}
                             defaultOptions={{}}
                             onClick={() => {
-                              isInRefPoints([longitude, latitude])
-                                ? removeRefPoint([longitude, latitude])
-                                : addRefPoint([longitude, latitude])
+                              isInRefPoints(point)
+                                ? removeRefPoint(point)
+                                : addRefPoint(point)
                             }}
-          >
-          </Placemark>
+          />
         })}
       </Map>
     </YMaps>

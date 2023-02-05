@@ -21,3 +21,11 @@
   justify-content: center;
   opacity: 90%;
 }
+
+.route-view {
+  position: absolute;
+  width: 45%;
+  top: 5%;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
