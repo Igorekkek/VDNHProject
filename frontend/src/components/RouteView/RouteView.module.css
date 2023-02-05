@@ -6,6 +6,11 @@
     display: flex;
     gap: .5rem;
     justify-content: space-between;
+    margin:0;
+    padding: 0;
+    text-indent: 0;
+    list-style-type: none;
+    user-select: none;
 }
 
 .mark {
@@ -13,6 +18,7 @@
     flex-direction: column;
     align-items: center;
     flex: 1;
+    text-align: center;
 }
 
 .mark__icon {
@@ -21,5 +27,5 @@
 }
 
 .mark__description {
-    font-size: .6rem;
+    font-size: 60%;
 }

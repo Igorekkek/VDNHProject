@@ -5,13 +5,13 @@ import { MapContext } from '../../context/MapContext'
 
 export const RouteView = () => {
   const { curRefPoints } = useContext(MapContext)
-  return <div className={cl.view}>
+  return <ul className={cl.view}>
     {curRefPoints?.map(point => {
-      return <div className={cl.mark}>
+      return <li className={cl.mark}>
         <img alt={`map icon of ${point.title}`} src={icon} className={cl.mark__icon}/>
         <p className={cl.mark__description}>{point.title}</p>
-      </div>
+      </li>
     })
     }
-  </div>
+  </ul>
 }
