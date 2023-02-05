@@ -16,7 +16,7 @@ const defaultMapState = { center: [55.828693, 37.633724], zoom: 16 }
 export const CustomMap = () => {
   const [ymaps, setYmaps] = useState(null)
   const { data: points } = usePoints()
-  const {curRefPoints: referencePoints} = useContext(MapContext)
+  const { curRefPoints: referencePoints, addRefPoint, removeRefPoint, isInRefPoints } = useContext(MapContext)
 
   const routes = useRef(null)
   const map = useRef(null)
@@ -39,7 +39,7 @@ export const CustomMap = () => {
         routeActivePedestrianSegmentStrokeStyle: 'solid',
         routeActivePedestrianSegmentStrokeColor: '#00CDCD',
       })
-
+      routes.current && ref.geoObjects.remove(routes.current)
       routes.current = multiRoute
       ref.geoObjects.add(multiRoute)
     }
@@ -62,6 +62,11 @@ export const CustomMap = () => {
         {points?.map(point => {
           return <Placemark geometry={[point.longitude, point.latitude]}
                             defaultOptions={{ iconColor: categoryToColor[point.category.slice(1, point.category.length - 1)] || '#dddddd' }}
+                            onClick={() => {
+                              isInRefPoints([point.longitude, point.latitude])
+                                ? removeRefPoint([point.longitude, point.latitude])
+                                : addRefPoint([point.longitude, point.latitude])
+                            }}
           >
           </Placemark>
         })}

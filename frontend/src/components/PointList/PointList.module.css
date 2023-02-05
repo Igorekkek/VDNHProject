@@ -2,6 +2,7 @@
     background-color: #000;
     width: 100%;
     height: 100%;
+
     list-style: none;
     margin-block-start: 0;
     margin-bottom: 0;
@@ -9,6 +10,7 @@
     padding-inline-start: 0;
     display: flex;
     flex-direction: column;
+
     overflow-y: scroll;
     scrollbar-gutter: stable;
     padding: 3px;
@@ -34,4 +36,8 @@
 .list__item:hover {
     background-image: linear-gradient(90deg, #FC354C, #0ABFBC);
     cursor: pointer;
+}
+
+.list__item_chosen {
+    background-image: linear-gradient(90deg, #FC354C, #0ABFBC);
 }
