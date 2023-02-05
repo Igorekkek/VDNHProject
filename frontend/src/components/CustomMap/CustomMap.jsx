@@ -34,10 +34,10 @@ export const CustomMap = () => {
         }
       }, {
         wayPointVisible: false,
-        boundsAutoApply: true,
+        boundsAutoApply: referencePoints.length !== 1,
 
         routeActivePedestrianSegmentStrokeStyle: 'solid',
-        routeActivePedestrianSegmentStrokeColor: '#00CDCD',
+        routeActivePedestrianSegmentStrokeColor: '#000',
       })
       routes.current && ref.geoObjects.remove(routes.current)
       routes.current = multiRoute
@@ -59,13 +59,14 @@ export const CustomMap = () => {
            }}
       >
         <ZoomControl/>
-        {points?.map(point => {
-          return <Placemark geometry={[point.longitude, point.latitude]}
-                            defaultOptions={{ iconColor: categoryToColor[point.category.slice(1, point.category.length - 1)] || '#dddddd' }}
+        {points?.map(({ category, latitude, longitude }) => {
+          return <Placemark geometry={[longitude, latitude]}
+                            options={{ iconColor: (isInRefPoints([longitude, latitude]) && '#0000ff') || categoryToColor[category.slice(1, category.length - 1)] || '#dddddd' }}
+                            defaultOptions={{}}
                             onClick={() => {
-                              isInRefPoints([point.longitude, point.latitude])
-                                ? removeRefPoint([point.longitude, point.latitude])
-                                : addRefPoint([point.longitude, point.latitude])
+                              isInRefPoints([longitude, latitude])
+                                ? removeRefPoint([longitude, latitude])
+                                : addRefPoint([longitude, latitude])
                             }}
           >
           </Placemark>
