@@ -4,15 +4,21 @@
     margin-bottom: 0;
     padding-block-start: 0;
     padding-inline-start: 0;
+    list-style: none;
 }
 
 
 .routes {
     color: #fff;
-    padding-left: 2rem;
-    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
 }
 
 .route {
 
+}
+
+.route__title {
+    margin: 0;
 }
