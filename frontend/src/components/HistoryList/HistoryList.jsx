@@ -9,10 +9,11 @@ const HistoryList = () => {
 
   if (isLoading) return <ul className={cl.routes}></ul>
   if (error) return <div>Error occurred</div>
+  if (!data?.post?.length) return null
 
   return (
     <ul className={cl.routes}>
-      {data?.post?.length && data.post.map(route => {
+      {data.post.map(route => {
         return <ol className={cl.route}
                    style={{ backgroundColor: `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})` }}
                    onClick={() => {

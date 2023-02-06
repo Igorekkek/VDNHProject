@@ -15,15 +15,24 @@ export const usePoints = () => {
 }
 
 export const useHistory = () => {
+  let userCode = localStorage.getItem('userMapApiCode')
+
+  const { data: newUser } = useQuery('createUser', () => {
+    return fetch('http://localhost:8000/api/createUser').then(res => {
+      if (!res.ok) throw new Error(`Error ${res.status}`)
+      return res.json()
+    })
+  }, { enabled: !userCode })
+
+  if (newUser) {
+    userCode = newUser['user_code']
+    localStorage.setItem('userMapApiCode', userCode)
+  }
+
   return useQuery('historyData', () => {
     const formData = new FormData()
-    let userCode = localStorage.getItem('userMapApiCode')
-    // TODO: Adding user to db if there is none
-    if (!userCode) {
-      userCode = 'sdifysbkjbiu2343dfsf'
-      localStorage.setItem('userMapApiCode', userCode)
-    }
     formData.set('user_code', userCode)
+
     return fetch('http://localhost:8000/api/getHistory/', {
       method: 'POST',
       body: formData,
