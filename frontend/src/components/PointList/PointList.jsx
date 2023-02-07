@@ -13,27 +13,30 @@ export const PointList = () => {
   if (error) return <div>Error occurred</div>
 
   return (
-    <div>
-      <label htmlFor="search-form">
-        <input type="search"
-               name="search-form"
-               id="search-form"
-               placeholder="Name"
-               value={searchValue}
-               onChange={event => setSearchValue(event.target.value)}
-        />
-        <span>Search for points here</span>
+    <div className={cl.pointList__outer}>
+      <label htmlFor="search-form" hidden>
+        Search for points here
       </label>
+      <input type="search"
+             name="search-form"
+             id="search-form"
+             placeholder="Искать"
+             value={searchValue}
+             className={cl.searchForm__search}
+             onChange={event => setSearchValue(event.target.value)}
+      />
       <ul className={cl.list}>
         {points.filter(point => point.title.toLowerCase().includes(searchValue.toLowerCase())).map(point => <li
-          className={cn(cl.item, { [cl.item_chosen]: isInRefPoints(point) })}
           key={point.code}
-          onClick={() => {
+        >
+          <button className={cn(cl.item, { [cl.item_chosen]: isInRefPoints(point) })} onClick={() => {
             isInRefPoints(point)
               ? removeRefPoint(point)
               : addRefPoint(point)
-          }}>
-          <h4 className={cl.item__title}>{point.title}</h4>
+          }}
+          >
+            <h4 className={cl.item__title}>{point.title}</h4>
+          </button>
         </li>)}
       </ul>
     </div>)

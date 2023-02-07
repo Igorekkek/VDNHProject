@@ -66,6 +66,7 @@ export const CustomMap = () => {
                                 ? removeRefPoint(point)
                                 : addRefPoint(point)
                             }}
+                            key={point.code}
           />
         })}
       </Map>
