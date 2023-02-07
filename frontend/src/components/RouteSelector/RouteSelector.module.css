@@ -1,5 +1,5 @@
 .tabs {
-    background-color: #000;
+    background-color: #240115;
     width: 100%;
     height: 100%;
 
@@ -10,14 +10,14 @@
 }
 
 .tabs::-webkit-scrollbar {
-    background-color: #222;
+    background-color: #240115;
     visibility: hidden;
     width: 8px;
     border-radius: 0 10px 10px 0;
 }
 
 .tabs::-webkit-scrollbar-thumb {
-    background-color: #fff;
+    background-color: #DE3C4B;
     border-radius: 0 10px 10px 0;
 }
 
@@ -42,7 +42,7 @@
 }
 
 .tabList__tab[aria-selected="true"] {
-    background-image: linear-gradient(90deg, #FC354C, #0ABFBC);
+    background-image: linear-gradient(90deg, #DE3C4B, #87F5FB);
 }
 
 .tabList__tab:hover {

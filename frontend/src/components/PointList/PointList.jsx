@@ -20,13 +20,13 @@ export const PointList = () => {
       <input type="search"
              name="search-form"
              id="search-form"
-             placeholder="Искать"
+             placeholder="Найти"
              value={searchValue}
              className={cl.searchForm__search}
              onChange={event => setSearchValue(event.target.value)}
       />
       <ul className={cl.list}>
-        {points.filter(point => point.title.toLowerCase().includes(searchValue.toLowerCase())).map(point => <li
+        {points.filter(point => point.title.toLowerCase().includes(searchValue.toLowerCase().trim())).map(point => <li
           key={point.code}
         >
           <button className={cn(cl.item, { [cl.item_chosen]: isInRefPoints(point) })} onClick={() => {

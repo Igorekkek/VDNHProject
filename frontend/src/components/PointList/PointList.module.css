@@ -6,13 +6,14 @@
 }
 
 .searchForm__search {
-    background: #333333;
+    background: #2F131E;
     border: none;
     width: 100%;
     font-size: 1.5rem;
+    height: 2rem;
     float: left;
-    color: #4a8a95;
-    padding: .2rem 0 .2rem 10px;
+    color: #DE3C4B;
+    padding: 0 0 0 10px;
     -webkit-transition: background .25s ease;
     -moz-transition: background .25s ease;
     -ms-transition: background .25s ease;
@@ -20,31 +21,46 @@
     transition: background .25s ease;
 }
 
-.searchForm__search::-ms-clear {  display: none; width : 0; height: 0; }
-.searchForm__search::-ms-reveal {  display: none; width : 0; height: 0; }
+.searchForm__search::-ms-clear {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+.searchForm__search::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
+}
 
 .searchForm__search::-webkit-search-decoration,
 .searchForm__search::-webkit-search-cancel-button,
 .searchForm__search::-webkit-search-results-button,
-.searchForm__search::-webkit-search-results-decoration { display: none; }
+.searchForm__search::-webkit-search-results-decoration {
+    display: none;
+}
 
-.searchForm__search:hover, .searchForm__search:focus, .searchForm__search:active{
-    outline:none;
-    background: #ffffff;
+.searchForm__search:hover, .searchForm__search:focus, .searchForm__search:active {
+    outline: none;
+    background-color: #fae4e7;
 }
 
 ::-webkit-input-placeholder {
-    color: #4a8a95;
+    color: #DE3C4B;
 }
+
 ::-moz-placeholder {
-    color: #4a8a95;
+    color: #DE3C4B;
 }
+
 :-ms-input-placeholder {
-    color: #4a8a95;
+    color: #DE3C4B;
 }
+
 :-moz-placeholder {
-    color: #4a8a95;
+    color: #DE3C4B;
 }
+
 
 .list {
     list-style: none;
@@ -59,7 +75,7 @@
 
 
 .item {
-    color: #fff;
+    color: #CEC3C1;
     transition: .1s ease-in-out;
     width: 100%;
     background-color: initial;
@@ -67,14 +83,14 @@
 }
 
 .item:hover {
-    background-color: #fff;
-    color: #000;
-    box-shadow: black;
+    background-color: #CEC3C1;
+    color: #240115;
+    box-shadow: #240115;
 }
 
 .item_chosen {
-    background-color: #fff;
-    color: #000
+    background-color: #CEC3C1;
+    color: #240115
 }
 
 .item__title {
