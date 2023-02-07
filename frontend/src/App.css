@@ -30,7 +30,9 @@
   transform: translate(-50%, 0);
 }
 
-.map__save-button {
+.map__buttons {
   position: absolute;
   top: 0;
+  display: flex;
+  gap: 1rem;
 }

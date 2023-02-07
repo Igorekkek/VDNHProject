@@ -36,11 +36,17 @@ function App() {
           <div className="route-view">
             <RouteView/>
           </div>
-          <div className="map__save-button">
+          <div className="map__buttons">
             {/*TODO: Make validation + call useQuery of 'getHistory' and give it mocked data instead of fetch to update it immediately in history window ?*/}
             <MapButton text={'Сохранить маршрут'}
                        onClick={async mapContext => {
                          await saveRoute(mapContext.curRefPoints)
+                       }}
+            />
+
+            <MapButton text={'Сбросить маршрут'}
+                       onClick={mapContext => {
+                         mapContext.setCurRefPoints([])
                        }}
             />
           </div>
