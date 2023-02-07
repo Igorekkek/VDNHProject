@@ -31,8 +31,7 @@ class AddHistoryView(APIView):
         user_code = request.data['user_code']
         trip = TravelRoute.objects.create(user=User.objects.get(user_code=user_code))
         for point in request.data['data']:
-            print(point)
             p = POISerializer(data=point)
-            trip.way.add(p)
+            trip.way.add(point['code'])
         trip.save()
         return Response({'ans' : 'good'})
