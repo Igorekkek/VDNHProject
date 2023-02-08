@@ -5,8 +5,9 @@
 }
 
 .searchForm__search {
-    background: #2F131E;
+    background: #240115;
     border: none;
+    border-bottom: #DE3C4B 1px solid;
     width: 100%;
     font-size: 1.5rem;
     height: 2rem;
@@ -41,7 +42,6 @@
 
 .searchForm__search:hover, .searchForm__search:focus, .searchForm__search:active {
     outline: none;
-    background-color: #fae4e7;
 }
 
 ::-webkit-input-placeholder {
