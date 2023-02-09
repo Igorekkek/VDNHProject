@@ -60,12 +60,17 @@ export const CustomMap = () => {
         <ZoomControl/>
         {points?.map((point) => {
           return <Placemark geometry={[point.longitude, point.latitude]}
-                            options={{ iconColor: (isInRefPoints(point) && '#0000ff') || categoryToColor[point.category] || '#dddddd' }}
+                            options={{
+                              iconColor: (isInRefPoints(point) && '#5858ff') || categoryToColor[point.category] || '#dddddd',
+                              hintOpenTimeout: 300, hintCloseTimeout: 100, hintHoldByMouse: false,  hintLayout: 'islands#hint'
+                            }}
+                            properties={{ hintContent: point.title }}
                             onClick={() => {
                               isInRefPoints(point)
                                 ? removeRefPoint(point)
                                 : addRefPoint(point)
                             }}
+                            modules={['geoObject.addon.hint']}
                             key={point.code}
           />
         })}
