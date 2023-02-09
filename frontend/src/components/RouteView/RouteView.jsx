@@ -5,6 +5,9 @@ import { MapContext } from '../../context/MapContext'
 
 export const RouteView = () => {
   const { curRefPoints } = useContext(MapContext)
+
+  if (!curRefPoints?.length) return null;
+
   return <ul className={cl.view}>
     {curRefPoints?.slice(Math.max(curRefPoints.length - 10, 0), Math.min(10, curRefPoints.length)).map((point) => {
       return <li className={cl.mark} key={point.code}>

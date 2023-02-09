@@ -34,14 +34,15 @@ const MapPage = () => {
       <div className={cl.map__buttons}>
         {/*TODO: Make validation + call useQuery of 'getHistory' and give it mocked data instead of fetch to update it immediately in history window ?*/}
         <button className={cl.map__button}
-          onClick={async mapContext => {
+          onClick={async () => {
+            if (!curRefPoints?.length) return
             await saveRoute(curRefPoints)
           }}>
           Сохранить маршрут
         </button>
 
         <button className={cl.map__button}
-          onClick={mapContext => {
+          onClick={() => {
             setCurRefPoints([])
           }}>
           Сбросить маршрут
