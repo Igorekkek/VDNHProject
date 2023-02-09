@@ -1,0 +1,48 @@
+.map {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+.map__content {
+    height: 100%;
+}
+
+.map__pointList {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 20%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 90%;
+}
+
+.routeView {
+    position: absolute;
+    width: 45%;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.map__buttons {
+    position: absolute;
+    top: .3rem;
+    left: .3rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.map__button {
+    background-color: #240115;
+    color: #fff;
+    border-radius: 3px;
+    padding: .4rem;
+    text-align: center;
+    border: none;
+}

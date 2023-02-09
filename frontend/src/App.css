@@ -1,38 +1,4 @@
-.map {
-  width: 100%;
-  height: 100vh;
-  position: relative;
-}
-
-.map__content {
-  height: 100%;
-}
-
-.map__point-list {
-  position: absolute;
-  right: 5%;
-  top: 50%;
-  transform: translate(0, -50%);
-  width: 20%;
-  height: 90%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  opacity: 90%;
-}
-
-.route-view {
-  position: absolute;
-  width: 45%;
-  top: 5%;
-  left: 50%;
-  transform: translate(-50%, 0);
-}
-
-.map__buttons {
-  position: absolute;
-  top: 0;
-  display: flex;
-  gap: 1rem;
+.app {
+    min-height: 100vh;
+    min-height: 100dvh;
 }
