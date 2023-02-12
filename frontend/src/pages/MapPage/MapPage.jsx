@@ -21,7 +21,7 @@ const MapPage = () => {
   const { curRefPoints, setCurRefPoints } = useContext(MapContext)
 
   return (
-    <main className={cl.map}>
+    <div className={cl.map}>
       <div className={cl.map__content}>
         <CustomMap/>
       </div>
@@ -48,7 +48,7 @@ const MapPage = () => {
           Сбросить маршрут
         </button>
       </div>
-    </main>
+    </div>
   )
 }
 

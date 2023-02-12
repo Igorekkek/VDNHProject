@@ -15,7 +15,6 @@ const HistoryList = () => {
     <ul className={cl.routes}>
       {data.post.map(route => {
         return <ol className={cl.route}
-                   style={{ backgroundColor: `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})` }}
                    onClick={() => {
                      setCurRefPoints(route)
                    }}
