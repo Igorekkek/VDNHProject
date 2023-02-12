@@ -62,3 +62,10 @@
         background-position: 0 50%;
     }
 }
+
+
+@media only screen and (max-width: 1200px) {
+    .map__pointList {
+        width: 25%;
+    }
+}

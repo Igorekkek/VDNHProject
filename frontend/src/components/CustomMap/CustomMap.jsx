@@ -4,6 +4,7 @@ import { Map, Placemark, YMaps, ZoomControl } from '@pbe/react-yandex-maps'
 import { usePoints } from '../../hooks'
 import { MapContext } from '../../context/MapContext'
 
+
 const categoryToColor = {
   'Развлечения': '#ee5041',
   'Павильон': '#000',
@@ -21,12 +22,12 @@ export const CustomMap = () => {
   const routes = useRef(null)
   const map = useRef(null)
 
-  const onLoad = (ymap) => {
+  const onLoad = ymap => {
     setYmaps(ymap)
   }
 
   const getRoute = ref => {
-    if (ymaps && referencePoints?.length) {
+    if (ymaps && referencePoints?.length > 1) {
       const multiRoute = new ymaps.multiRouter.MultiRoute({
         referencePoints: referencePoints.map((p) => [p.longitude, p.latitude]),
         params: {
@@ -34,9 +35,15 @@ export const CustomMap = () => {
         }
       }, {
         wayPointVisible: false,
+        viaPointVisible: false,
         boundsAutoApply: referencePoints.length !== 1,
         routeActivePedestrianSegmentStrokeStyle: 'solid',
         routeActivePedestrianSegmentStrokeColor: '#000',
+      })
+      multiRoute.model.events.add('requestsuccess', event => {
+        multiRoute.getActiveRoute().getPaths().each(geo => {
+
+        })
       })
       routes.current && ref.geoObjects.remove(routes.current)
       routes.current = multiRoute
@@ -62,7 +69,10 @@ export const CustomMap = () => {
           return <Placemark geometry={[point.longitude, point.latitude]}
                             options={{
                               iconColor: (isInRefPoints(point) && '#5858ff') || categoryToColor[point.category] || '#dddddd',
-                              hintOpenTimeout: 300, hintCloseTimeout: 100, hintHoldByMouse: false,  hintLayout: 'islands#hint'
+                              hintOpenTimeout: 300,
+                              hintCloseTimeout: 100,
+                              hintHoldByMouse: false,
+                              hintLayout: 'islands#hint'
                             }}
                             properties={{ hintContent: point.title }}
                             onClick={() => {
