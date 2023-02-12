@@ -17,10 +17,31 @@ const getClosestRoute = (start, points) => {
   return route
 }
 
+class SimpleEvent {
+  #listeners
+  constructor() {
+    this.#listeners = []
+  }
+
+  dispatch() {
+    this.#listeners.forEach(listener => listener())
+  }
+
+  add(listener) {
+    this.#listeners.push(listener)
+  }
+
+  remove(listener) {
+    this.#listeners = this.#listeners.filter(l => l !== listener)
+  }
+}
+
 export const MapContext = createContext()
 
 export const MapProvider = (props) => {
   const [curRefPoints, setCurRefPoints] = useState([])
+  const makeRouteEvent = new SimpleEvent()
+  const clearRouteEvent = new SimpleEvent()
 
   const setPoints = points => {
     if (points.length <= 1) {
@@ -46,5 +67,7 @@ export const MapProvider = (props) => {
       addRefPoint,
       removeRefPoint,
       isInRefPoints,
+      makeRouteEvent,
+      clearRouteEvent
     }}>{props.children}</MapContext.Provider>
 }

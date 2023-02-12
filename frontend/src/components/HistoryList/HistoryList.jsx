@@ -1,11 +1,11 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useHistory } from '../../hooks'
 import cl from './HistoryList.module.css'
 import { MapContext } from '../../context/MapContext'
 
 const HistoryList = () => {
   const { isLoading, error, data } = useHistory()
-  const { setCurRefPoints } = useContext(MapContext)
+  const { setCurRefPoints, makeRouteEvent } = useContext(MapContext)
 
   if (isLoading) return <ul className={cl.routes}></ul>
   if (error) return <div>Error occurred</div>
@@ -17,6 +17,7 @@ const HistoryList = () => {
         return <ol className={cl.route}
                    onClick={() => {
                      setCurRefPoints(route)
+                     makeRouteEvent.dispatch()
                    }}
       >
           {route.map((point) => <li className={cl.route__item}>

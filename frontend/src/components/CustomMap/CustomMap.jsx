@@ -1,9 +1,8 @@
 import cl from './CustomMap.module.css'
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Map, Placemark, YMaps, ZoomControl } from '@pbe/react-yandex-maps'
 import { usePoints } from '../../hooks'
 import { MapContext } from '../../context/MapContext'
-
 
 const categoryToColor = {
   'Развлечения': '#ee5041',
@@ -17,16 +16,31 @@ const defaultMapState = { center: [55.828693, 37.633724], zoom: 16 }
 export const CustomMap = () => {
   const [ymaps, setYmaps] = useState(null)
   const { data: points } = usePoints()
-  const { curRefPoints: referencePoints, addRefPoint, removeRefPoint, isInRefPoints } = useContext(MapContext)
+  const {
+    curRefPoints: referencePoints,
+    addRefPoint,
+    removeRefPoint,
+    isInRefPoints,
+    makeRouteEvent,
+    clearRouteEvent
+  } = useContext(MapContext)
 
   const routes = useRef(null)
   const map = useRef(null)
+
+  useEffect(() => {
+    makeRouteEvent.add(() => makeRoute(map.current))
+  }, [makeRouteEvent])
+
+  useEffect(() => {
+    clearRouteEvent.add(() => clearRoute(map.current))
+  })
 
   const onLoad = ymap => {
     setYmaps(ymap)
   }
 
-  const getRoute = ref => {
+  const makeRoute = ref => {
     if (ymaps && referencePoints?.length > 1) {
       const multiRoute = new ymaps.multiRouter.MultiRoute({
         referencePoints: referencePoints.map((p) => [p.longitude, p.latitude]),
@@ -40,15 +54,14 @@ export const CustomMap = () => {
         routeActivePedestrianSegmentStrokeStyle: 'solid',
         routeActivePedestrianSegmentStrokeColor: '#000',
       })
-      multiRoute.model.events.add('requestsuccess', event => {
-        multiRoute.getActiveRoute().getPaths().each(geo => {
-
-        })
-      })
       routes.current && ref.geoObjects.remove(routes.current)
       routes.current = multiRoute
       ref.geoObjects.add(multiRoute)
     }
+  }
+
+  const clearRoute = ref => {
+    routes.current && ref.geoObjects.remove(routes.current)
   }
 
   return (
@@ -59,7 +72,6 @@ export const CustomMap = () => {
            onLoad={onLoad}
            instanceRef={ref => {
              if (!ref) return
-             getRoute(ref)
              map.current = ref
              ref.behaviors.disable(['scrollZoom', 'rightMouseButtonMagnifier'])
            }}

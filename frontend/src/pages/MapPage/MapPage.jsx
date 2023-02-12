@@ -18,7 +18,7 @@ const saveRoute = route => {
 }
 
 const MapPage = () => {
-  const { curRefPoints, setCurRefPoints } = useContext(MapContext)
+  const { curRefPoints, setCurRefPoints, makeRouteEvent, clearRouteEvent } = useContext(MapContext)
 
   return (
     <div className={cl.map}>
@@ -44,8 +44,16 @@ const MapPage = () => {
         <button className={cl.map__button}
           onClick={() => {
             setCurRefPoints([])
+            clearRouteEvent.dispatch()
           }}>
           Сбросить маршрут
+        </button>
+        <button className={cl.map__button}
+                onClick={() => {
+                  makeRouteEvent.dispatch()
+                }}
+        >
+          Создать маршрут
         </button>
       </div>
     </div>

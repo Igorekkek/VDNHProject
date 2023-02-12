@@ -54,3 +54,7 @@
 .tabList__tab:focus-visible {
     outline: none;
 }
+
+.tabList__tab:last-of-type {
+    border-radius: 10px 0 0 0;
+}
