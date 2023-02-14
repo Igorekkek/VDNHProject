@@ -19,6 +19,8 @@ class User(models.Model):
 class TravelRoute(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     way = models.ManyToManyField(PointOfInterest, blank=True)
+    time = models.IntegerField(blank=True, null=True)
+    way_len = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return f'<User : {self.user} | way : >'
