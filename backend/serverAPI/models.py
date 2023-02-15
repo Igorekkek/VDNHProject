@@ -6,8 +6,6 @@ class PointOfInterest(models.Model):
     title = models.CharField(max_length=300)
     longitude = models.FloatField()
     latitude = models.FloatField()
-    time = models.IntegerField(blank=True, null=True)
-    way_len = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return f'<{self.code} | {self.title} | {self.longitude} | {self.latitude}>'
