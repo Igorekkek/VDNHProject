@@ -23,13 +23,18 @@ class HistoryView(APIView):
         rouds = TravelRoute.objects.filter(user__user_code=user_code)
         answer = []
         for roud in rouds:
-            answer.append(POISerializer(roud.way.all(), many=True).data)
+            answer.append({"points" : POISerializer(roud.way.all(), many=True).data,
+                           "time" : roud.time,
+                           "way_len" : roud.way_len})
+
         return Response({'post': answer})
 
 class AddHistoryView(APIView):
     def post(self, request):
         user_code = request.data['user_code']
-        trip = TravelRoute.objects.create(user=User.objects.get(user_code=user_code))
+        trip = TravelRoute.objects.create(user=User.objects.get(user_code=user_code),
+                                          time=request.data['time'],
+                                          way_len=request.data['way_len'])
         for point in request.data['data']:
             p = POISerializer(data=point)
             trip.way.add(point['code'])
