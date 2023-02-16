@@ -4,12 +4,13 @@ import { useContext } from 'react'
 import { MapContext } from '../../context/MapContext'
 
 export const RouteView = () => {
-  const { curRefPoints } = useContext(MapContext)
+  const { curRoute } = useContext(MapContext)
+  const points = curRoute.points
 
-  if (!curRefPoints?.length) return null;
+  if (!points?.length) return null;
 
   return <ul className={cl.view}>
-    {curRefPoints?.slice(Math.max(curRefPoints.length - 10, 0), Math.min(10, curRefPoints.length)).map((point) => {
+    {points?.slice(Math.max(points.length - 10, 0), Math.min(10, points.length)).map((point) => {
       return <li className={cl.mark} key={point.code}>
         <img draggable={false} alt={`map icon of ${point.title}`} src={icon} className={cl.mark__icon}/>
         <p className={cl.mark__description}>{point.title}</p>

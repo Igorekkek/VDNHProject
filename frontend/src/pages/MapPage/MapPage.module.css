@@ -51,6 +51,11 @@
     height: 100%;
 }
 
+.map__button_disabled {
+    pointer-events: none;
+    filter: brightness(80%);
+}
+
 @keyframes gradient {
     0% {
         background-position: 0 50%;

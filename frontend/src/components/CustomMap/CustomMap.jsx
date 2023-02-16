@@ -17,13 +17,15 @@ export const CustomMap = () => {
   const [ymaps, setYmaps] = useState(null)
   const { data: points } = usePoints()
   const {
-    curRefPoints: referencePoints,
+    curRoute,
+    setRouteProps,
     addRefPoint,
     removeRefPoint,
     isInRefPoints,
     makeRouteEvent,
     clearRouteEvent
   } = useContext(MapContext)
+  const referencePoints = curRoute.points
 
   const routes = useRef(null)
   const map = useRef(null)
@@ -54,9 +56,17 @@ export const CustomMap = () => {
         routeActivePedestrianSegmentStrokeStyle: 'solid',
         routeActivePedestrianSegmentStrokeColor: '#000',
       })
-      routes.current && ref.geoObjects.remove(routes.current)
-      routes.current = multiRoute
-      ref.geoObjects.add(multiRoute)
+      setRouteProps({time: null, wayLen: null})
+      multiRoute.model.events.add('requestsuccess', () => {
+        const activeRoute = multiRoute.getActiveRoute()
+        setRouteProps({
+          wayLen: activeRoute.properties.get('distance').value,
+          time: activeRoute.properties.get('duration').value
+        })
+        routes.current && ref.geoObjects.remove(routes.current)
+        routes.current = multiRoute
+        ref.geoObjects.add(multiRoute)
+      })
     }
   }
 

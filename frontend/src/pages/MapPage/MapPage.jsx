@@ -4,10 +4,19 @@ import CustomMap from '../../components/CustomMap/CustomMap'
 import RouteSelector from '../../components/RouteSelector/RouteSelector'
 import { RouteView } from '../../components/RouteView/RouteView'
 import { MapContext } from '../../context/MapContext'
+import cn from 'classnames'
+import { useQuery } from 'react-query'
 
 const saveRoute = route => {
   return fetch('http://localhost:8000/api/addHistory/', {
-    method: 'POST', body: JSON.stringify({ data: route, user_code: localStorage.getItem('userMapApiCode') }), headers: {
+    method: 'POST',
+    body: JSON.stringify({
+      data: route.points,
+      time: route.time,
+      way_len: route.wayLen,
+      user_code: localStorage.getItem('userMapApiCode')
+    }),
+    headers: {
       'Content-Type': 'application/json'
     }
   })
@@ -18,7 +27,17 @@ const saveRoute = route => {
 }
 
 const MapPage = () => {
-  const { curRefPoints, setCurRefPoints, makeRouteEvent, clearRouteEvent } = useContext(MapContext)
+  const {
+    curRoute,
+    setCurRefPoints,
+    setRouteProps,
+    makeRouteEvent,
+    clearRouteEvent,
+  } = useContext(MapContext)
+  const { refetch, data } = useQuery('historyData', async () => {
+    return {post: [...data.post, curRoute]}
+  }, { enabled: false })
+  const points = curRoute.points
 
   return (
     <div className={cl.map}>
@@ -33,25 +52,29 @@ const MapPage = () => {
       </div>
       <div className={cl.map__buttons}>
         {/*TODO: Make validation + call useQuery of 'getHistory' and give it mocked data instead of fetch to update it immediately in history window ?*/}
-        <button className={cl.map__button}
+        <button
+          className={cn(cl.map__button, { [cl.map__button_disabled]: points?.length <= 1 || !curRoute.time })}
           onClick={async () => {
-            if (!curRefPoints?.length) return
-            await saveRoute(curRefPoints)
+            await saveRoute(curRoute)
+            await refetch()
           }}>
           Сохранить маршрут
         </button>
 
-        <button className={cl.map__button}
+        <button
+          className={cn(cl.map__button, { [cl.map__button_disabled]: points?.length <= 1 })}
           onClick={() => {
             setCurRefPoints([])
+            setRouteProps({ time: null, wayLen: null })
             clearRouteEvent.dispatch()
           }}>
           Сбросить маршрут
         </button>
-        <button className={cl.map__button}
-                onClick={() => {
-                  makeRouteEvent.dispatch()
-                }}
+        <button
+          className={cn(cl.map__button, { [cl.map__button_disabled]: points?.length <= 1 })}
+          onClick={() => {
+            makeRouteEvent.dispatch()
+          }}
         >
           Создать маршрут
         </button>
