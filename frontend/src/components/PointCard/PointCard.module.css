@@ -1,0 +1,37 @@
+.card {
+    color: var(--text-color);
+    transition: .07s ease-in-out;
+    width: 100%;
+    background-color: initial;
+    border: none;
+    display: flex;
+}
+
+.card:hover {
+    background-color: var(--text-color);
+    color: var(--background-color);
+    box-shadow: #240115;
+}
+
+.card_chosen {
+    background-color: var(--text-color);
+    color: var(--background-color);
+}
+
+.card__title {
+    display: inline;
+    text-align: left;
+    margin: .5rem 0;
+}
+
+.card__category {
+    transition: .3s ease-in-out;
+    color: transparent;
+    margin-left: .2rem;
+    font-size: .8rem;
+    vertical-align: top;
+}
+
+.card:hover .card__category {
+    color: var(--accent-color-3)
+}

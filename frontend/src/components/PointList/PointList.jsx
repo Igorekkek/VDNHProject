@@ -1,8 +1,8 @@
 import cl from './PointList.module.css'
-import cn from 'classnames'
 import React, { useContext, useState } from 'react'
 import { usePoints } from '../../hooks'
 import { MapContext } from '../../context/MapContext'
+import PointCard from '../PointCard/PointCard'
 
 export const PointList = () => {
   const { isLoading, error, data: points } = usePoints()
@@ -20,7 +20,7 @@ export const PointList = () => {
       <input type="search"
              name="search-form"
              id="search-form"
-             placeholder="Найти"
+             placeholder="Поиск"
              value={searchValue}
              className={cl.searchForm__search}
              onChange={event => setSearchValue(event.target.value)}
@@ -29,14 +29,16 @@ export const PointList = () => {
         {points.filter(point => point.title.toLowerCase().includes(searchValue.toLowerCase().trim())).map(point => <li
           key={point.code}
         >
-          <button className={cn(cl.item, { [cl.item_chosen]: isInRefPoints(point) })} onClick={() => {
-            isInRefPoints(point)
-              ? removeRefPoint(point)
-              : addRefPoint(point)
-          }}
-          >
-            <h4 className={cl.item__title}>{point.title}</h4>
-          </button>
+          <PointCard
+            onClick={() => {
+              isInRefPoints(point)
+                ? removeRefPoint(point)
+                : addRefPoint(point)
+            }}
+            chosen={isInRefPoints(point)}
+            title={point.title}
+            category={point.category}
+          />
         </li>)}
       </ul>
     </div>)

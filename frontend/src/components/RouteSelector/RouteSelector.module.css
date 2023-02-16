@@ -1,24 +1,21 @@
 .tabs {
-    background-color: #240115;
+    background-color: var(--background-color);
     width: 100%;
     height: 100%;
 
     overflow-y: scroll;
     scroll-behavior: smooth;
     scrollbar-gutter: stable;
-    border-radius: 10px;
 }
 
 .tabs::-webkit-scrollbar {
-    background-color: #240115;
+    background-color: var(--background-color);
     visibility: hidden;
     width: 8px;
-    border-radius: 0 10px 10px 0;
 }
 
 .tabs::-webkit-scrollbar-thumb {
-    background-color: #DE3C4B;
-    border-radius: 0 10px 10px 0;
+    background-color: var(--accent-color-3);
 }
 
 .tabList {
@@ -29,21 +26,20 @@
     padding-inline-start: 0;
     display: flex;
     justify-content: space-around;
-    color: #fff;
+    color: var(--accent-color-3)
 }
 
 .tabList__tab {
     text-align: center;
     font-size: 1.1rem;
     flex: 1;
-    background-color: #222;
-    border-radius: 10px 10px 0 0;
+    background-color: var(--background-color);
     padding: .2rem 0;
 }
 
 .tabList__tab[aria-selected="true"] {
-    background-image: linear-gradient(90deg, #DE3C4B, #87F5FB);
-    color: #000;
+    background-image: linear-gradient(-90deg, var(--accent-color-1), var(--accent-color-2));
+    color: var(--text-color);
     font-style: italic
 }
 
@@ -53,8 +49,4 @@
 
 .tabList__tab:focus-visible {
     outline: none;
-}
-
-.tabList__tab:last-of-type {
-    border-radius: 10px 0 0 0;
 }

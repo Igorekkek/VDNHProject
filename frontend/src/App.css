@@ -2,3 +2,11 @@
     min-height: 100vh;
     min-height: 100dvh;
 }
+
+:root {
+    --background-color: #191923;
+    --text-color: #FBFEF9;
+    --accent-color-1: #0E79B2;
+    --accent-color-2: #BF1363;
+    --accent-color-3: #F39237;
+}
