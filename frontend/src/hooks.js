@@ -47,3 +47,12 @@ export const useHistory = () => {
     ).catch(console.error)
   }, { staleTime: 360_000 })
 }
+
+const useStaticRoutes = () => {
+  useQuery('staticRoutes', () => {
+    return fetch('http://localhost:8000/api/').then(res => {
+      if (!res.ok) throw new Error(`Error ${res.status}`)
+      return res.json()
+    }).catch(console.error)
+  })
+}
