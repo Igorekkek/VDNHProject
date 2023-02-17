@@ -30,9 +30,12 @@ const saveRoute = async route => {
     }
   })
     .then(res => {
-      if (!res.ok) throw new Error(`Error ${res.status}`)
+      if (!res.ok) throw new Error(res)
       return res.json()
-    }).catch(console.error)
+    }).catch(async () => {
+      localStorage.removeItem('userMapApiCode')
+      await saveRoute()
+    })
 }
 
 const MapPage = () => {
