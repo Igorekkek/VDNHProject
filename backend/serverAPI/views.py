@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from serverAPI.models import User, TravelRoute, PointOfInterest, ReadyRoutes
 from rest_framework import generics
-from .serializers import *
+from .serializers import POISerializer, ReadyRotesSerializer
 from .funcs import GenUniqueUserCode
 
 
@@ -11,9 +11,15 @@ class POIView(generics.ListAPIView):
     queryset = PointOfInterest.objects.all()
     serializer_class = POISerializer
 
-class ReadyRotesView(generics.ListAPIView):
-    queryset = ReadyRoutes.objects.all()
-    serializer_class = ReadyRotesSerializer
+class ReadyRotesView(APIView):
+    def get(self, request):
+        rouds = ReadyRoutes.objects.all()
+        answer = []
+        for roud in rouds:
+            answer.append({'time': roud.time,
+                           'way_len': roud.way_len,
+                           'points': POISerializer(roud.way.all(), many=True).data})
+        return Response({'post' : answer})
 
 class CreateUserAPI(APIView):
     def get(self, request):

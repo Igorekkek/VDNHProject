@@ -24,7 +24,7 @@ class TravelRoute(models.Model):
 
     def __str__(self):
         return f'<User : {self.user} | way : >'
-
+    
 class ReadyRoutes(models.Model):
     way = models.ManyToManyField(PointOfInterest, blank=True)
     time = models.IntegerField(blank=True)

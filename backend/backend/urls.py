@@ -23,5 +23,5 @@ urlpatterns = [
     path('api/createUser/', CreateUserAPI.as_view()),
     path('api/getHistory/', HistoryView.as_view()),
     path('api/addHistory/', AddHistoryView.as_view()),
-    path('api/getReadyRoutes/', ReadyRotesView.as_view())
+    path('api/getReadyRoutes/', ReadyRotesView.as_view()),
 ]
