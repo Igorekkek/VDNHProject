@@ -1,5 +1,7 @@
 import { useQuery } from 'react-query'
 
+
+
 export const usePoints = () => {
   return useQuery('allPointsData', () =>
       fetch('http://localhost:8000/api/getPOI/').then(res => {
