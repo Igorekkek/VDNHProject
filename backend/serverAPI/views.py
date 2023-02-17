@@ -1,15 +1,19 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from serverAPI.models import User, TravelRoute, PointOfInterest
+from serverAPI.models import User, TravelRoute, PointOfInterest, ReadyRoutes
 from rest_framework import generics
-from .serializers import POISerializer
+from .serializers import *
 from .funcs import GenUniqueUserCode
 
 
 class POIView(generics.ListAPIView):
     queryset = PointOfInterest.objects.all()
     serializer_class = POISerializer
+
+class ReadyRotesView(generics.ListAPIView):
+    queryset = ReadyRoutes.objects.all()
+    serializer_class = ReadyRotesSerializer
 
 class CreateUserAPI(APIView):
     def get(self, request):
