@@ -26,15 +26,20 @@
     padding-inline-start: 0;
     display: flex;
     justify-content: space-around;
-    color: var(--accent-color-3)
+    color: var(--accent-color-3);
+    height: 3rem;
 }
 
 .tabList__tab {
-    text-align: center;
     font-size: 1.1rem;
     flex: 1;
     background-color: var(--background-color);
     padding: .2rem 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 5px 10px black;
 }
 
 .tabList__tab[aria-selected="true"] {

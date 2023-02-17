@@ -6,6 +6,8 @@ const RouteList = ({routes}) => {
   const {setCurRefPoints, makeRouteEvent} = useContext(MapContext)
   let formatter = new Intl.DateTimeFormat('ru', {minute: 'numeric', second: 'numeric'})
 
+  if (!routes?.length) return <ul className={cl.routes}></ul>
+
 
   return (
     <ul className={cl.routes}>
