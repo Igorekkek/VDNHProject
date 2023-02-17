@@ -88,7 +88,7 @@ const MapPage = () => {
             makeRouteEvent.dispatch()
           }}
         >
-          Создать маршрут
+          Построить маршрут
         </button>
       </div>
     </div>

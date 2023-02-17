@@ -92,7 +92,7 @@ export const CustomMap = () => {
         {points?.map((point) => {
           return <Placemark geometry={[point.longitude, point.latitude]}
                             options={{
-                              iconColor: (isInRefPoints(point) && '#5858ff') || categoryToColor[point.category] || '#dddddd',
+                              iconColor: (isInRefPoints(point) && '#BF1363') || categoryToColor[point.category] || '#dddddd',
                               hintOpenTimeout: 300,
                               hintCloseTimeout: 100,
                               hintHoldByMouse: false,
