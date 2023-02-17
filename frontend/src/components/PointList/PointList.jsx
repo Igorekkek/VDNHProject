@@ -6,7 +6,7 @@ import PointCard from '../PointCard/PointCard'
 
 export const PointList = () => {
   const { isLoading, error, data: points } = usePoints()
-  const { addRefPoint, removeRefPoint, isInRefPoints } = useContext(MapContext)
+  const { addRefPoint, removeRefPoint, isInRefPoints, setMapCenter } = useContext(MapContext)
   const [searchValue, setSearchValue] = useState('')
 
   if (isLoading) return <ul className={cl.list}></ul>
@@ -35,6 +35,7 @@ export const PointList = () => {
                 ? removeRefPoint(point)
                 : addRefPoint(point)
             }}
+            onHover={() => setMapCenter([point.longitude, point.latitude])}
             chosen={isInRefPoints(point)}
             title={point.title}
             category={point.category}

@@ -11,7 +11,7 @@ const categoryToColor = {
   'Вход': '#22bb30'
 }
 
-const defaultMapState = { center: [55.828693, 37.633724], zoom: 16 }
+const defaultMapState = { zoom: 16 }
 
 export const CustomMap = () => {
   const [ymaps, setYmaps] = useState(null)
@@ -23,7 +23,8 @@ export const CustomMap = () => {
     removeRefPoint,
     isInRefPoints,
     makeRouteEvent,
-    clearRouteEvent
+    clearRouteEvent,
+    mapCenter
   } = useContext(MapContext)
   const referencePoints = curRoute.points
 
@@ -78,6 +79,7 @@ export const CustomMap = () => {
     <YMaps query={{ lang: 'ru_RU', apikey: process.env.REACT_APP_YMAPS_API_KEY }}>
       <Map className={cl.map}
            defaultState={defaultMapState}
+           state={{center: mapCenter, zoom: 16}}
            modules={['multiRouter.MultiRoute']}
            onLoad={onLoad}
            instanceRef={ref => {
