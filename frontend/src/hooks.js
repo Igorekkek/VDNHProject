@@ -1,7 +1,5 @@
 import { useQuery } from 'react-query'
 
-
-
 export const usePoints = () => {
   return useQuery('allPointsData', () =>
       fetch('http://localhost:8000/api/getPOI/').then(res => {
@@ -48,11 +46,11 @@ export const useHistory = () => {
   }, { staleTime: 360_000 })
 }
 
-const useStaticRoutes = () => {
-  useQuery('staticRoutes', () => {
-    return fetch('http://localhost:8000/api/').then(res => {
+export const useStaticRoutes = () => {
+  return useQuery('staticRoutes', () => {
+    return fetch('http://localhost:8000/api/getReadyRoutes').then(res => {
       if (!res.ok) throw new Error(`Error ${res.status}`)
       return res.json()
     }).catch(console.error)
-  })
+  }, { staleTime: Infinity })
 }
