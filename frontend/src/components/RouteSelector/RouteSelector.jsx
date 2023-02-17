@@ -24,7 +24,7 @@ const RouteSelector = () =>
           <PointList />
         </TabPanel>
         <TabPanel>
-          {data?.post.length !== 0 && <RouteList routes={data.post}/>}
+          {<RouteList routes={data?.post}/>}
         </TabPanel>
         <TabPanel>
           {/* TODO: Static routes */}

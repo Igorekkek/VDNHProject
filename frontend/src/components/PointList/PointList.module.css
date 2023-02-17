@@ -8,8 +8,8 @@
     border-bottom: var(--accent-color-2) 1px solid;
     font-weight: lighter;
     width: 100%;
-    font-size: 1.5rem;
-    height: 2.5rem;
+    font-size: 1.75rem;
+    height: 3.5rem;
     float: left;
     color: var(--accent-color-2);
     padding: 0 0 0 10px;
@@ -44,18 +44,22 @@
 }
 
 ::-webkit-input-placeholder {
+    font-size: 1.75rem;
     color: var(--accent-color-2);
 }
 
 ::-moz-placeholder {
+    font-size: 1.75rem;
     color: var(--accent-color-2);
 }
 
 :-ms-input-placeholder {
+    font-size: 1.75rem;
     color: var(--accent-color-2);
 }
 
 :-moz-placeholder {
+    font-size: 1.75rem;
     color: var(--accent-color-2);
 }
 

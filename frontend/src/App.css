@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
+
 .app {
     min-height: 100vh;
     min-height: 100dvh;
@@ -9,4 +11,6 @@
     --accent-color-1: #0E79B2;
     --accent-color-2: #BF1363;
     --accent-color-3: #F39237;
+
+    --text-font: 'PT Sans', sans-serif;
 }
