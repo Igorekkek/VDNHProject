@@ -22,6 +22,7 @@
     top: 5%;
     left: 50%;
     transform: translate(-50%, 0);
+    z-index: 0;
 }
 
 .map__buttons {
@@ -59,12 +60,5 @@
     }
     100% {
         background-position: 0 50%;
-    }
-}
-
-
-@media only screen and (max-width: 1200px) {
-    .map__pointList {
-        width: 25%;
     }
 }

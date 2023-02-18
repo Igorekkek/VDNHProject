@@ -1,16 +1,38 @@
 .card {
     color: var(--text-color);
-    transition: .07s ease-in-out;
     width: 100%;
     background-color: initial;
     border: none;
     display: flex;
 }
 
-.card:hover {
-    background-color: var(--text-color);
-    color: var(--background-color);
-    box-shadow: #240115;
+@keyframes background-animation {
+    0% {
+        background-color: var(--background-color);
+        color: var(--text-color)
+    }
+    100% {
+        background-color: var(--text-color);
+        color: var(--background-color)
+    }
+}
+
+@keyframes border-animation {
+    100% {
+        outline: 3px var(--accent-color-2) solid;
+    }
+}
+
+.card_chosen:hover {
+    animation: border-animation 1s forwards;
+}
+
+.card:not(.card_chosen):hover {
+    animation: background-animation .07s forwards, border-animation 1s forwards;
+}
+
+.card:active {
+    filter: drop-shadow(3px 10px 10px black);
 }
 
 .card_chosen {

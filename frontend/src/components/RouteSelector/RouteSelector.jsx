@@ -1,10 +1,9 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import cl from './RouteSelector.module.css'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 import { PointList } from '../PointList/PointList'
 import RouteList from '../RouteList/RouteList'
 import { useHistory, useStaticRoutes } from '../../hooks'
-import { MapContext } from '../../context/MapContext'
 
 const RouteSelector = () => {
   const { data: historyRoutes } = useHistory()
