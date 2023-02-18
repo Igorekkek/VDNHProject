@@ -3,11 +3,15 @@ import cl from './RouteSelector.module.css'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 import { PointList } from '../PointList/PointList'
 import RouteList from '../RouteList/RouteList'
-import { useHistory, useStaticRoutes } from '../../hooks'
+import { useHistory, useStaticRoutes, useWindowDimensions } from '../../hooks'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const RouteSelector = () => {
   const { data: historyRoutes } = useHistory()
   const { data: staticRoutes } = useStaticRoutes()
+  const [width] = useWindowDimensions()
+
+  if (width < 600) return  <button className={cl.button}><FontAwesomeIcon icon='fa-route' className={cl.button__icon}/></button>
 
   return (
     <Tabs className={cl.tabs}>

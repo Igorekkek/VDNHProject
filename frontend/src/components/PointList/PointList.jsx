@@ -20,7 +20,7 @@ export const PointList = () => {
       <input type="search"
              name="search-form"
              id="search-form"
-             placeholder="Поиск"
+             placeholder='&#x1F50E;&#xFE0E; Поиск'
              value={searchValue}
              className={cl.searchForm__search}
              onChange={event => setSearchValue(event.target.value)}
