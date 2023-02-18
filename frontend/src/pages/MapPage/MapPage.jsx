@@ -6,6 +6,8 @@ import { RouteView } from '../../components/RouteView/RouteView'
 import { MapContext } from '../../context/MapContext'
 import cn from 'classnames'
 import { useQuery } from 'react-query'
+import { useWindowDimensions } from '../../hooks'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const saveRoute = async route => {
   let newUser = localStorage.getItem('userMapApiCode')
@@ -49,6 +51,8 @@ const MapPage = () => {
   const { refetch, data } = useQuery('historyData', async () => {
     return { post: [...data?.post, {way_len: curRoute.wayLen, points: curRoute.points, time: curRoute.time}] }
   }, { enabled: false })
+
+  const [width, height] = useWindowDimensions()
   const points = curRoute.points
 
   return (
@@ -70,7 +74,7 @@ const MapPage = () => {
             saveRoute(curRoute)
             await refetch()
           }}>
-          Сохранить маршрут
+          {width > 600 ? 'Сохранить маршрут' : <FontAwesomeIcon className={cl.map__icon} icon={'fa-floppy-disk'}/>}
         </button>
 
         <button
@@ -80,7 +84,7 @@ const MapPage = () => {
             setRouteProps({ time: null, wayLen: null })
             clearRouteEvent.dispatch()
           }}>
-          Сбросить маршрут
+          {width > 600 ? 'Сбросить маршрут' : <FontAwesomeIcon className={cl.map__icon} icon={'fa-trash-can'}/>}
         </button>
         <button
           className={cn(cl.map__button, { [cl.map__button_disabled]: points?.length <= 1 })}
@@ -88,7 +92,7 @@ const MapPage = () => {
             makeRouteEvent.dispatch()
           }}
         >
-          Построить маршрут
+          {width > 600 ? 'Построить маршрут' : <FontAwesomeIcon className={cl.map__icon} icon={'fa-square-plus'}/>}
         </button>
       </div>
     </div>

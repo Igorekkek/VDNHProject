@@ -1,4 +1,5 @@
 import { useQuery } from 'react-query'
+import { useEffect, useState } from 'react'
 
 export const usePoints = () => {
   return useQuery('allPointsData', () =>
@@ -53,4 +54,14 @@ export const useStaticRoutes = () => {
       return res.json()
     }).catch(console.error)
   }, { staleTime: Infinity })
+}
+
+export const useWindowDimensions = () => {
+  const [windowDimensions, setWindowDimensions] = useState([window.innerWidth, window.innerHeight])
+  useEffect(() => {
+    const onResize = () => setWindowDimensions([window.innerWidth, window.innerHeight])
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+  return windowDimensions
 }

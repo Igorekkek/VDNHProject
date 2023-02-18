@@ -88,7 +88,7 @@ export const CustomMap = () => {
              ref.behaviors.disable(['scrollZoom', 'rightMouseButtonMagnifier'])
            }}
       >
-        <ZoomControl/>
+        <ZoomControl options={{position: {top: '2.75rem', left: '.3rem'}}}></ZoomControl>
         {points?.map((point) => {
           return <Placemark geometry={[point.longitude, point.latitude]}
                             options={{

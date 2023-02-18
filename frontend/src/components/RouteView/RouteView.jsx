@@ -2,12 +2,15 @@ import cl from './RouteView.module.css'
 import icon from '../../images/icon.png'
 import { useContext } from 'react'
 import { MapContext } from '../../context/MapContext'
+import { useWindowDimensions } from '../../hooks'
 
 export const RouteView = () => {
   const { curRoute } = useContext(MapContext)
+  const [width, height] = useWindowDimensions()
   const points = curRoute.points
 
   if (!points?.length) return null;
+  if (width < 600) return null;
 
   return <ul className={cl.view}>
     {points?.slice(Math.max(points.length - 10, 0), Math.min(10, points.length)).map((point) => {

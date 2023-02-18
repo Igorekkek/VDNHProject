@@ -5,10 +5,10 @@ import 'normalize.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faClock, faRoad, faRoute } from '@fortawesome/free-solid-svg-icons'
+import { faClock, faRoad, faFloppyDisk, faTrashCan, faSquarePlus } from '@fortawesome/free-solid-svg-icons'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-library.add(faClock, faRoad)
+library.add(faClock, faRoad, faFloppyDisk, faTrashCan, faSquarePlus)
 root.render(
   <React.StrictMode>
     <App />
