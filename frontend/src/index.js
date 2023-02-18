@@ -4,8 +4,11 @@ import './index.css';
 import 'normalize.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faClock, faRoad, faRoute } from '@fortawesome/free-solid-svg-icons'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+library.add(faClock, faRoad)
 root.render(
   <React.StrictMode>
     <App />

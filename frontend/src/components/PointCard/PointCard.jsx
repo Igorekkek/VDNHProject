@@ -7,7 +7,7 @@ const PointCard = ({ title, category, onClick = null, onHover = null, chosen = f
   return <button className={cn(cl.card, { [cl.card_chosen]: chosen })}
                  onClick={e => {
                    if (timeout) clearTimeout(timeout)
-                   return onClick && onClick(e) }}
+                   onClick && onClick(e) }}
                  onMouseEnter={e => {
                    if (!onHover) return
                    timeout = setTimeout(() => onHover(e), 1000)
