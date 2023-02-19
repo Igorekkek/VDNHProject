@@ -7,19 +7,18 @@ const RouteList = ({ routes }) => {
   const { setCurRefPoints, makeRouteEvent } = useContext(MapContext)
 
   if (!routes?.length) return <ul className={cl.routes}></ul>
-
   return (
     <ul className={cl.routes}>
       {routes.map(route => {
         return (
-          <li className={cl.route__outer}>
+          <li className={cl.route__outer} key={Date.now() + route.points.toString()}>
             <ol className={cl.route}
                 onClick={() => {
                   setCurRefPoints(route.points)
                   makeRouteEvent.dispatch()
                 }}
             >
-              {route.points.map(point => <li className={cl.route__item}>
+              {route.points.map(point => <li className={cl.route__item} key={point.code}>
                 <h4 className={cl.route__title}>{point.title}</h4>
               </li>)}
             </ol>

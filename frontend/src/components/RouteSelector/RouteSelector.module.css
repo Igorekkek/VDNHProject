@@ -8,6 +8,14 @@
     scrollbar-gutter: stable;
 }
 
+.tabs_mobile {
+    height: 80%;
+}
+
+.tabs_hidden {
+    display: none;
+}
+
 .tabs::-webkit-scrollbar {
     background-color: var(--background-color);
     visibility: hidden;
@@ -68,6 +76,9 @@
         background-size: 400% 400%;
         animation: gradient 30s ease infinite;
         padding: .4rem;
+        position: absolute;
+        right: 1rem;
+        bottom: 3rem;
     }
 
     .button__icon {
