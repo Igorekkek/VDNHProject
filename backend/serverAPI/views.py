@@ -16,9 +16,12 @@ class ReadyRotesView(APIView):
         rouds = ReadyRoutes.objects.all()
         answer = []
         for roud in rouds:
+            points = list(roud.way.all())
+            points.insert(0, PointOfInterest.objects.get(code=9))
+            points = list(POISerializer(points, many=True).data)
             answer.append({'time': roud.time,
                            'way_len': roud.way_len,
-                           'points': POISerializer(roud.way.all(), many=True).data})
+                           'points': points})
         return Response({'post' : answer})
 
 class CreateUserAPI(APIView):
