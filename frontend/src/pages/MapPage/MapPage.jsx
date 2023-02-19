@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useRef } from 'react'
 import cl from './MapPage.module.css'
 import CustomMap from '../../components/CustomMap/CustomMap'
 import RouteSelector from '../../components/RouteSelector/RouteSelector'
@@ -49,22 +49,23 @@ const MapPage = () => {
     clearRouteEvent,
   } = useContext(MapContext)
   const { refetch, data } = useQuery('historyData', async () => {
-    return { post: [...data?.post, {way_len: curRoute.wayLen, points: curRoute.points, time: curRoute.time}] }
+    return { post: [...data?.post, { way_len: curRoute.wayLen, points: curRoute.points, time: curRoute.time }] }
   }, { enabled: false })
+  const timeRestrictionField = useRef(null)
 
-  const [width, height] = useWindowDimensions()
+  const [width] = useWindowDimensions()
   const points = curRoute.points
 
   return (
     <div className={cl.map}>
       <div className={cl.map__content}>
-        <CustomMap />
+        <CustomMap timeRestrictionField={timeRestrictionField}/>
       </div>
       <div className={cl.map__pointList}>
-        <RouteSelector />
+        <RouteSelector/>
       </div>
       <div className={cl.routeView}>
-        <RouteView />
+        <RouteView/>
       </div>
       <div className={cl.map__buttons}>
         {/*TODO: Make validation + call useQuery of 'getHistory' and give it mocked data instead of fetch to update it immediately in history window ?*/}
@@ -92,8 +93,13 @@ const MapPage = () => {
             makeRouteEvent.dispatch()
           }}
         >
-          {width > 600 ? 'Построить маршрут' : <FontAwesomeIcon className={cl.map__icon} icon={'fa-square-plus'}/>}
+          {width > 600 ? 'Построить маршрут' : <FontAwesomeIcon className={cl.map__icon} icon="fa-square-plus"/>}
         </button>
+        <form className={cl.restrictionForm}>
+          <label htmlFor="time-restriction"><FontAwesomeIcon className={cl.restrictionForm__icon} icon="fa-stopwatch"/></label>
+          <input type="number" id="time-restriction" ref={timeRestrictionField} className={cl.map__button} min="20"
+                 max="90" defaultValue="50"/>
+        </form>
       </div>
     </div>
   )

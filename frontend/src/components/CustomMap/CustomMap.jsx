@@ -13,7 +13,7 @@ const categoryToColor = {
 
 const defaultMapState = { zoom: 16 }
 
-export const CustomMap = () => {
+export const CustomMap = ({ timeRestrictionField }) => {
   const [ymaps, setYmaps] = useState(null)
   const { data: points } = usePoints()
   const {
@@ -57,10 +57,11 @@ export const CustomMap = () => {
         routeActivePedestrianSegmentStrokeStyle: 'solid',
         routeActivePedestrianSegmentStrokeColor: '#000',
       })
-      setRouteProps({time: null, wayLen: null})
+      setRouteProps({ time: null, wayLen: null })
       multiRoute.model.events.add('requestsuccess', () => {
         const activeRoute = multiRoute.getActiveRoute()
-        if (Math.floor(activeRoute.properties.get('duration').value / 60) >= 30) return alert('Маршрут дольше 30 минут')
+        if (Math.floor(activeRoute.properties.get('duration').value / 60) >= timeRestrictionField.current?.value)
+          return alert(`Маршрут дольше ${timeRestrictionField.current?.value} минут`)
         setRouteProps({
           wayLen: activeRoute.properties.get('distance').value,
           time: activeRoute.properties.get('duration').value
@@ -80,7 +81,7 @@ export const CustomMap = () => {
     <YMaps query={{ lang: 'ru_RU', apikey: process.env.REACT_APP_YMAPS_API_KEY }}>
       <Map className={cl.map}
            defaultState={defaultMapState}
-           state={{center: mapCenter, zoom: 16}}
+           state={{ center: mapCenter, zoom: 16 }}
            modules={['multiRouter.MultiRoute']}
            onLoad={onLoad}
            instanceRef={ref => {
@@ -89,7 +90,7 @@ export const CustomMap = () => {
              ref.behaviors.disable(['scrollZoom', 'rightMouseButtonMagnifier'])
            }}
       >
-        <ZoomControl options={{position: {top: '2.75rem', left: '.3rem'}}}></ZoomControl>
+        <ZoomControl options={{ position: { top: '2.75rem', left: '.3rem' } }}></ZoomControl>
         {points?.map((point) => {
           return <Placemark geometry={[point.longitude, point.latitude]}
                             options={{

@@ -11,11 +11,12 @@ import {
   faMagnifyingGlass,
   faRoad, faRoute,
   faSquarePlus,
-  faTrashCan
+  faTrashCan,
+  faStopwatch
 } from '@fortawesome/free-solid-svg-icons'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
-library.add(faClock, faRoad, faFloppyDisk, faTrashCan, faSquarePlus, faMagnifyingGlass, faRoute)
+library.add(faClock, faRoad, faFloppyDisk, faTrashCan, faSquarePlus, faMagnifyingGlass, faRoute, faStopwatch)
 root.render(
   <React.StrictMode>
     <App/>

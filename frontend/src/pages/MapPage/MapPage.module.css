@@ -31,6 +31,7 @@
     left: .3rem;
     display: flex;
     gap: 1rem;
+    align-items: center;
 }
 
 .map__button {
@@ -46,14 +47,32 @@
     height: 100%;
 }
 
+.map__button::placeholder {
+    font-size: .8rem;
+    display: flex;
+    justify-content: flex-start;
+    color: var(--text-color);
+}
+
 .map__icon {
-    width: 1.2rem;
-    height: 1.2rem;
+    width: 1.7rem;
+    height: 1.7rem;
 }
 
 .map__button_disabled {
     pointer-events: none;
     filter: brightness(80%);
+}
+
+.restrictionForm {
+    display: flex;
+    align-items: center;
+    gap: .2rem;
+}
+
+.restrictionForm__icon {
+    font-size: 1.7rem;
+    color: var(--accent-color-2);
 }
 
 @keyframes gradient {
