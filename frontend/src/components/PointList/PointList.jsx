@@ -1,5 +1,5 @@
 import cl from './PointList.module.css'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { usePoints } from '../../hooks'
 import { MapContext } from '../../context/MapContext'
 import PointCard from '../PointCard/PointCard'
@@ -9,9 +9,6 @@ export const PointList = () => {
   const { addRefPoint, removeRefPoint, isInRefPoints, setMapCenter, startPointCode } = useContext(MapContext)
   const [searchValue, setSearchValue] = useState('')
 
-  useEffect(() => {
-    points && addRefPoint(points.find(point => point.code === startPointCode))
-  }, [points])
 
   if (isLoading) return <ul className={cl.list}></ul>
   if (error) return <div>Error occurred</div>

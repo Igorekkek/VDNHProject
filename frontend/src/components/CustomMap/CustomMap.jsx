@@ -40,6 +40,10 @@ export const CustomMap = ({ timeRestrictionField }) => {
     clearRouteEvent.add(() => clearRoute(map.current))
   })
 
+  useEffect(() => {
+    points && addRefPoint(points.find(point => point.code === startPointCode))
+  }, [points])
+
   const onLoad = ymap => {
     setYmaps(ymap)
   }

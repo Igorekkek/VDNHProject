@@ -12,14 +12,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const saveRoute = async route => {
   let newUser = localStorage.getItem('userMapApiCode')
   if (!newUser) {
-    newUser = (await fetch('http://localhost:8000/api/createUser').then(res => {
+    newUser = (await fetch(`${process.env.REACT_APP_SERVER_ADDRESS}/api/createUser`).then(res => {
       if (!res.ok) throw new Error(`Error ${res.status}`)
       return res.json()
     }).catch(console.error)).user_code
     localStorage.setItem('userMapApiCode', newUser)
   }
 
-  return fetch('http://localhost:8000/api/addHistory/', {
+  return fetch(`${process.env.REACT_APP_SERVER_ADDRESS}/api/addHistory/`, {
     method: 'POST',
     body: JSON.stringify({
       data: route.points,

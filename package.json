@@ -3,7 +3,7 @@
     "concurrently": "^7.6.0"
   },
   "scripts": {
-    "server": "python backend/manage.py runserver",
+    "server": "python backend/manage.py runserver 192.168.1.65:8000",
     "client": "npm run start --prefix frontend",
     "dev": "concurrently \"npm run client\" \"npm run server\""
   }
