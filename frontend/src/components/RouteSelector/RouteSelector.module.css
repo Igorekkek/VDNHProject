@@ -10,6 +10,7 @@
 
 .tabs_mobile {
     height: 80%;
+    width: 100vw;
 }
 
 .tabs_hidden {

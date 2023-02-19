@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import cl from './RouteList.module.css'
 import { MapContext } from '../../context/MapContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import uuid from 'react-uuid'
 
 const RouteList = ({ routes }) => {
   const { setCurRefPoints, makeRouteEvent } = useContext(MapContext)
@@ -11,7 +12,7 @@ const RouteList = ({ routes }) => {
     <ul className={cl.routes}>
       {routes.map(route => {
         return (
-          <li className={cl.route__outer} key={Date.now() + route.points.toString()}>
+          <li className={cl.route__outer} key={uuid()}>
             <ol className={cl.route}
                 onClick={() => {
                   setCurRefPoints(route.points)

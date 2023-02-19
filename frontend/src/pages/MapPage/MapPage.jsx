@@ -81,7 +81,7 @@ const MapPage = () => {
         <button
           className={cn(cl.map__button, { [cl.map__button_disabled]: points?.length <= 1 })}
           onClick={() => {
-            setCurRefPoints([])
+            setCurRefPoints([curRoute.points[0]])
             setRouteProps({ time: null, wayLen: null })
             clearRouteEvent.dispatch()
           }}>
