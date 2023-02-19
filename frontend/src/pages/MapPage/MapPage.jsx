@@ -49,7 +49,7 @@ const MapPage = () => {
     clearRouteEvent,
   } = useContext(MapContext)
   const { refetch, data } = useQuery('historyData', async () => {
-    return { post: [...data?.post, { way_len: curRoute.wayLen, points: curRoute.points, time: curRoute.time }] }
+    return [...data, { way_len: curRoute.wayLen, points: curRoute.points, time: curRoute.time }]
   }, { enabled: false })
   const timeRestrictionField = useRef(null)
 

@@ -1,5 +1,7 @@
 import { useQuery } from 'react-query'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { getClosestRoute } from './utils'
+import { MapContext } from './context/MapContext'
 
 export const usePoints = () => {
   return useQuery('allPointsData', () =>
@@ -18,6 +20,7 @@ export const usePoints = () => {
 }
 
 export const useHistory = () => {
+  const { startPointCode } = useContext(MapContext)
   let userCode = localStorage.getItem('userMapApiCode')
 
   const { data: newUser } = useQuery('createUser', () => {
@@ -43,16 +46,31 @@ export const useHistory = () => {
         if (!res.ok) throw new Error(`Error ${res.status}`)
         return res.json()
       }
-    ).catch(console.error)
+    ).then(data => {
+      if (!data?.post.length) return []
+      return data.post.map(route => ({
+        ...route, points: getClosestRoute(route.points.find(point => point.code === startPointCode),
+          route.points.filter(point => point.code !== startPointCode))
+      }))
+    }).catch(console.error)
   }, { staleTime: 360_000 })
 }
 
 export const useStaticRoutes = () => {
+  const { startPointCode } = useContext(MapContext)
+
   return useQuery('staticRoutes', () => {
     return fetch(`${process.env.REACT_APP_SERVER_ADDRESS}/api/getReadyRoutes`).then(res => {
       if (!res.ok) throw new Error(`Error ${res.status}`)
       return res.json()
-    }).catch(console.error)
+    }).then(data => {
+        if (!data?.post?.length) return []
+        return data.post.map(route => ({
+          ...route, points: getClosestRoute(route.points.find(point => point.code === startPointCode),
+            route.points.filter(point => point.code !== startPointCode))
+        }))
+      }
+    ).catch(console.error)
   }, { staleTime: Infinity })
 }
 
