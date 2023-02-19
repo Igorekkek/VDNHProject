@@ -9,7 +9,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <main className="App">
-        <MapProvider>
+        <MapProvider startPointCode={9}>
           <MapPage/>
         </MapProvider>
       </main>

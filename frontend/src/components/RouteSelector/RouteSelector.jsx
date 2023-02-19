@@ -11,7 +11,7 @@ const RouteSelector = () => {
   const { data: staticRoutes } = useStaticRoutes()
   const [width] = useWindowDimensions()
 
-  if (width < 600) return  <button className={cl.button}><FontAwesomeIcon icon='fa-route' className={cl.button__icon}/></button>
+  if (width <= 900) return  <button className={cl.button}><FontAwesomeIcon icon='fa-route' className={cl.button__icon}/></button>
 
   return (
     <Tabs className={cl.tabs}>

@@ -41,8 +41,9 @@ export const MapContext = createContext()
 
 export const MapProvider = (props) => {
   const [curRoute, setCurRoute] = useState({ points: [], time: null, wayLen: null })
-    const [mapCenter, setMapCenter] = useState([55.828693, 37.633724])
+  const [mapCenter, setMapCenter] = useState([55.828693, 37.633724])
 
+  const startPointCode = props.startPointCode;
   const makeRouteEvent = new SimpleEvent()
   const clearRouteEvent = new SimpleEvent()
 
@@ -76,7 +77,8 @@ export const MapProvider = (props) => {
       makeRouteEvent,
       clearRouteEvent,
       mapCenter,
-      setMapCenter
+      setMapCenter,
+      startPointCode
     }}>{props.children}</MapContext.Provider>
 }
 

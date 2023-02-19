@@ -40,6 +40,10 @@
     color: var(--background-color);
 }
 
+.card_disabled {
+    filter: brightness(50%);
+}
+
 .card__title {
     display: inline;
     text-align: left;

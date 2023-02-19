@@ -24,7 +24,8 @@ export const CustomMap = ({ timeRestrictionField }) => {
     isInRefPoints,
     makeRouteEvent,
     clearRouteEvent,
-    mapCenter
+    mapCenter,
+    startPointCode
   } = useContext(MapContext)
   const referencePoints = curRoute.points
 
@@ -102,6 +103,7 @@ export const CustomMap = ({ timeRestrictionField }) => {
                             }}
                             properties={{ hintContent: point.title }}
                             onClick={() => {
+                              if (point.code === startPointCode) return
                               isInRefPoints(point)
                                 ? removeRefPoint(point)
                                 : addRefPoint(point)

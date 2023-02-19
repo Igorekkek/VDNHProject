@@ -1,13 +1,15 @@
 import cl from './PointList.module.css'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { usePoints } from '../../hooks'
 import { MapContext } from '../../context/MapContext'
 import PointCard from '../PointCard/PointCard'
 
 export const PointList = () => {
   const { isLoading, error, data: points } = usePoints()
-  const { addRefPoint, removeRefPoint, isInRefPoints, setMapCenter } = useContext(MapContext)
+  const { addRefPoint, removeRefPoint, isInRefPoints, setMapCenter, startPointCode } = useContext(MapContext)
   const [searchValue, setSearchValue] = useState('')
+
+  useEffect(() => addRefPoint(points.find(point => point.code === startPointCode)), [])
 
   if (isLoading) return <ul className={cl.list}></ul>
   if (error) return <div>Error occurred</div>
@@ -20,7 +22,7 @@ export const PointList = () => {
       <input type="search"
              name="search-form"
              id="search-form"
-             placeholder='&#x1F50E;&#xFE0E; Поиск'
+             placeholder="&#x1F50E;&#xFE0E; Поиск"
              value={searchValue}
              className={cl.searchForm__search}
              onChange={event => setSearchValue(event.target.value)}
@@ -31,6 +33,7 @@ export const PointList = () => {
         >
           <PointCard
             onClick={() => {
+              if (point.code === startPointCode) return
               isInRefPoints(point)
                 ? removeRefPoint(point)
                 : addRefPoint(point)
@@ -39,6 +42,7 @@ export const PointList = () => {
             chosen={isInRefPoints(point)}
             title={point.title}
             category={point.category}
+            disabled={point.code === startPointCode}
           />
         </li>)}
       </ul>

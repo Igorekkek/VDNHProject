@@ -75,7 +75,7 @@ const MapPage = () => {
             saveRoute(curRoute)
             await refetch()
           }}>
-          {width > 600 ? 'Сохранить маршрут' : <FontAwesomeIcon className={cl.map__icon} icon={'fa-floppy-disk'}/>}
+          {width >= 720 ? 'Сохранить маршрут' : <FontAwesomeIcon className={cl.map__icon} icon={'fa-floppy-disk'}/>}
         </button>
 
         <button
@@ -85,7 +85,7 @@ const MapPage = () => {
             setRouteProps({ time: null, wayLen: null })
             clearRouteEvent.dispatch()
           }}>
-          {width > 600 ? 'Сбросить маршрут' : <FontAwesomeIcon className={cl.map__icon} icon={'fa-trash-can'}/>}
+          {width >= 720 ? 'Сбросить маршрут' : <FontAwesomeIcon className={cl.map__icon} icon={'fa-trash-can'}/>}
         </button>
         <button
           className={cn(cl.map__button, { [cl.map__button_disabled]: points?.length <= 1 })}
@@ -93,7 +93,7 @@ const MapPage = () => {
             makeRouteEvent.dispatch()
           }}
         >
-          {width > 600 ? 'Построить маршрут' : <FontAwesomeIcon className={cl.map__icon} icon="fa-square-plus"/>}
+          {width >= 720 ? 'Построить маршрут' : <FontAwesomeIcon className={cl.map__icon} icon="fa-square-plus"/>}
         </button>
         <form className={cl.restrictionForm}>
           <label htmlFor="time-restriction"><FontAwesomeIcon className={cl.restrictionForm__icon} icon="fa-stopwatch"/></label>
