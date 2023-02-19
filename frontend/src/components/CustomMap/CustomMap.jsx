@@ -65,8 +65,9 @@ export const CustomMap = ({ timeRestrictionField }) => {
       setRouteProps({ time: null, wayLen: null })
       multiRoute.model.events.add('requestsuccess', () => {
         const activeRoute = multiRoute.getActiveRoute()
-        if (Math.floor(activeRoute.properties.get('duration').value / 60) >= timeRestrictionField.current?.value)
-          return alert(`Маршрут дольше ${timeRestrictionField.current?.value} минут`)
+        const time = Math.floor(activeRoute.properties.get('duration').value / 60)
+        if (time >= timeRestrictionField.current?.value)
+          return alert(`Маршрут дольше ${timeRestrictionField.current?.value} минут: >${time} минут.`)
         setRouteProps({
           wayLen: activeRoute.properties.get('distance').value,
           time: activeRoute.properties.get('duration').value
