@@ -20,8 +20,7 @@
     position: absolute;
     width: 40%;
     top: 5%;
-    left: 50%;
-    transform: translate(-50%, 0);
+    left: 3rem;
     z-index: 0;
 }
 
