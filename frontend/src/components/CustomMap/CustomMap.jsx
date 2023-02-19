@@ -60,6 +60,7 @@ export const CustomMap = () => {
       setRouteProps({time: null, wayLen: null})
       multiRoute.model.events.add('requestsuccess', () => {
         const activeRoute = multiRoute.getActiveRoute()
+        if (Math.floor(activeRoute.properties.get('duration').value / 60) >= 30) return alert('Маршрут дольше 30 минут')
         setRouteProps({
           wayLen: activeRoute.properties.get('distance').value,
           time: activeRoute.properties.get('duration').value
