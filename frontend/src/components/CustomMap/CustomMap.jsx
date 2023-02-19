@@ -112,6 +112,7 @@ export const CustomMap = ({ timeRestrictionField }) => {
                               isInRefPoints(point)
                                 ? removeRefPoint(point)
                                 : addRefPoint(point)
+                              setRouteProps({time: null, wayLen: 0})
                             }}
                             modules={['geoObject.addon.hint']}
                             key={point.code}
