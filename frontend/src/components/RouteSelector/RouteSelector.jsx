@@ -25,10 +25,10 @@ const RouteSelector = () => {
           <PointList/>
         </TabPanel>
         <TabPanel>
-          <RouteList routes={historyRoutes?.post}/>
+          <RouteList routes={historyRoutes}/>
         </TabPanel>
         <TabPanel>
-          <RouteList routes={staticRoutes?.post}/>
+          <RouteList routes={staticRoutes}/>
         </TabPanel>
       </Tabs>
       <button className={cl.button} onClick={() => setHiddenFullscreen(prevState => !prevState)}>
@@ -47,10 +47,10 @@ const RouteSelector = () => {
         <PointList/>
       </TabPanel>
       <TabPanel>
-        <RouteList routes={historyRoutes?.post}/>
+        <RouteList routes={historyRoutes}/>
       </TabPanel>
       <TabPanel>
-        <RouteList routes={staticRoutes?.post}/>
+        <RouteList routes={staticRoutes}/>
       </TabPanel>
     </Tabs>
   )
