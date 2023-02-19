@@ -9,7 +9,9 @@ export const PointList = () => {
   const { addRefPoint, removeRefPoint, isInRefPoints, setMapCenter, startPointCode } = useContext(MapContext)
   const [searchValue, setSearchValue] = useState('')
 
-  useEffect(() => addRefPoint(points.find(point => point.code === startPointCode)), [])
+  useEffect(() => {
+    points && addRefPoint(points.find(point => point.code === startPointCode))
+  }, [points])
 
   if (isLoading) return <ul className={cl.list}></ul>
   if (error) return <div>Error occurred</div>
